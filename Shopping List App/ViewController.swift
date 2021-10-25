@@ -7,13 +7,62 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+public struct ShopItems: Codable {
+    var name: String
+}
 
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+     var shopArray = [ShopItems]()
+    
+
+    @IBOutlet weak var tableViewOutlet: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+       
+        tableViewOutlet.delegate = self
+        tableViewOutlet.dataSource = self
+        
+        shopArray.append(ShopItems(name: "Banana"))
+        shopArray.append(ShopItems(name: "Strawberries"))
+        
+        if let items = UserDefaults.standard.data(forKey: "shoppingList") {
+            let decoder = JSONDecoder()
+            if let decoded = try? decoder.decode([ShopItems].self, from: items){
+                shopArray = decoded
+                print("reading data")
+            }
+        }
+        
     }
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return shopArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableViewOutlet.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
+        cell.textLabel?.text = shopArray[indexPath.row].name
+        
+        return cell
+    }
+    
+    @IBAction func saveButtonAction(_ sender: UIButton) {
+        
+        shopArray.append(ShopItems(name: "banana"))
+        
+        
+        let encoder = JSONEncoder()
+        
+        if let encoded = try? encoder.encode(shopArray) {
+            
+            UserDefaults.standard.set(shopArray, forKey: "shoppingList")
+            
+        }
+        
+    }
+    
 
 }
 
