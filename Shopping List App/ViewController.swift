@@ -13,7 +13,8 @@ public struct ShopItems: Codable {
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-     var shopArray = [ShopItems]()
+    @IBOutlet weak var textFieldOutlet: UITextField!
+    var shopArray = [ShopItems]()
     
 
     @IBOutlet weak var tableViewOutlet: UITableView!
@@ -47,6 +48,38 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         return cell
     }
+    
+    @IBAction func addAction(_ sender: UIButton) {
+     
+        if let inText = textFieldOutlet.text {
+            var count = 0
+            var check = false
+            while(count < shopArray.count){
+                if inText == shopArray[count].name {
+                    check = true
+                }
+                count += 1
+            }
+            
+            if check{
+                let alert = UIAlertController(title: "Error", message: "Item is already in the shopping cart", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Yes, will do", style: .default, handler: nil))
+                self.present(alert, animated: true)
+            }
+            else{
+            shopArray.append(ShopItems(name: inText))
+            }
+        }
+        else{
+            let alert = UIAlertController(title: "Error", message: "TextField could not be converted", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes, will do", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
+           
+        
+        
+    }
+    
     
     @IBAction func saveButtonAction(_ sender: UIButton) {
         
