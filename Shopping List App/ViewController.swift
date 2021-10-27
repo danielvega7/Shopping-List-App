@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var textFieldOutlet: UITextField!
     var shopArray = [ShopItems]()
+    var shopCart = [ShopItems]()
     
 
     @IBOutlet weak var tableViewOutlet: UITableView!
@@ -49,6 +50,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            shopArray.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let name = shopArray[indexPath.row].name
+        let alert = UIAlertController(title: "item added to shopping cart", message: "\(name) has been added to the cart", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Awesome", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
     @IBAction func addAction(_ sender: UIButton) {
      
         if let inText = textFieldOutlet.text {
@@ -76,7 +91,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.present(alert, animated: true)
         }
            
-        
+        tableViewOutlet.reloadData()
         
     }
     
@@ -90,7 +105,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if let encoded = try? encoder.encode(shopArray) {
             
-            UserDefaults.standard.set(shopArray, forKey: "shoppingList")
+            UserDefaults.standard.set(encoded, forKey: "shoppingList")
             
         }
         
