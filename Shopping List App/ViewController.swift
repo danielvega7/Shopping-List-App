@@ -14,6 +14,9 @@ public struct ShopItems: Codable {
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var textFieldOutlet: UITextField!
+    @IBOutlet weak var textViewOutlet: UITextView!
+    
+    var urMom = 0
     var shopArray = [ShopItems]()
     var shopCart = [ShopItems]()
     
@@ -33,7 +36,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let decoder = JSONDecoder()
             if let decoded = try? decoder.decode([ShopItems].self, from: items){
                 shopArray = decoded
-                print("reading data")
+               
             }
         }
         
@@ -54,6 +57,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if editingStyle == .delete {
             shopArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            urMom = urMom - 1
         }
     }
     
@@ -62,6 +66,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let alert = UIAlertController(title: "item added to shopping cart", message: "\(name) has been added to the cart", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Awesome", style: .default, handler: nil))
         self.present(alert, animated: true)
+        
+        shopCart.append(ShopItems(name: "\(name)"))
+        textViewOutlet.text += "\(shopCart[urMom].name) \n"
+        urMom += 1
+        shopArray.remove(at: indexPath.row)
+        tableViewOutlet.reloadData()
+        
+        
+            textViewOutlet.text += "\(shopCart[urMom].name) \n"
+            urMom += 1
+        
     }
     
     @IBAction func addAction(_ sender: UIButton) {
@@ -97,9 +112,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     @IBAction func saveButtonAction(_ sender: UIButton) {
-        
-        shopArray.append(ShopItems(name: "banana"))
-        
         
         let encoder = JSONEncoder()
         

@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3sW-G7-gHn">
-                                <rect key="frame" x="0.0" y="88" width="390" height="756"/>
+                                <rect key="frame" x="0.0" y="88" width="390" height="546.33333333333337"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="myCell" textLabel="7P9-pW-IUX" detailTextLabel="4wF-cF-63X" style="IBUITableViewCellStyleValue1" id="vfj-D3-o1j">
@@ -46,14 +46,22 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tHa-gx-CHx">
+                                <rect key="frame" x="0.0" y="652" width="390" height="146"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.80039202409999999" blue="0.89349398700000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="3sW-G7-gHn" secondAttribute="trailing" id="QCa-Uy-Xoa"/>
-                            <constraint firstAttribute="bottom" secondItem="3sW-G7-gHn" secondAttribute="bottom" id="daq-gb-kfB"/>
-                            <constraint firstItem="3sW-G7-gHn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="qJP-jp-1gX"/>
-                            <constraint firstItem="3sW-G7-gHn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="yuA-n7-w7a"/>
+                            <constraint firstItem="3sW-G7-gHn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="GKW-g2-dfN"/>
+                            <constraint firstItem="3sW-G7-gHn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="rT0-oc-Gub"/>
+                            <constraint firstItem="3sW-G7-gHn" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="v95-k7-bon"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3sW-G7-gHn" secondAttribute="bottom" multiplier="1.2" id="yIi-0r-OfO"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -94,11 +102,12 @@
                     <connections>
                         <outlet property="tableViewOutlet" destination="3sW-G7-gHn" id="Mjl-RS-RL2"/>
                         <outlet property="textFieldOutlet" destination="xyR-cR-bbN" id="6PJ-Lb-CaM"/>
+                        <outlet property="textViewOutlet" destination="tHa-gx-CHx" id="F3g-Kl-BfJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2767.6923076923076" y="67.535545023696685"/>
+            <point key="canvasLocation" x="3441.5384615384614" y="67.535545023696685"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="30S-Fc-Ua5">
@@ -120,6 +129,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
